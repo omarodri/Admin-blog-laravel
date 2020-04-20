@@ -6,19 +6,18 @@
         <div class="col-md-8">
             @foreach ($posts as $post)
             <div class="card mb-4">
+                @if ($post->image)
+                    <img src="{{ $post->get_image }}" class="card-img-top">
+                @elseif($post->iframe)
+                    <div class="embed-responsive embed-responsive-16by9">
+                        {!! $post->iframe !!}
+                    </div>
+                @endif
                 <div class="card-body">
-                    @if ($post->image)
-                        <img src="{{ $post->get_image }}" class="card-img-top">
-                    @elseif($post->iframe)
-                        <div class="embed-responsive embed-responsive-16by9">
-                            {!! $post->iframe !!}
-                        </div>
-                    @endif
-
                     <h5 class="card-title">{{ $post->title }}</h5>
                     <p class="card-text">
                         {{ $post->get_extract }}
-                        <a href="{{ route('post', $post) }}">Leer mâs</a>
+                        <a href="{{ route('post', $post) }}">Read more</a>
                     </p>
                     <p class="text-muted mb-0">
                         <em>
